@@ -1,0 +1,84 @@
+{% extends 'includes/layout.html' %}
+
+
+{% block body %}
+<main class="container">
+  <div class="bg-light p-5 rounded mt-5">
+    <h1> Meta Title Generator </h1>
+    <p class="lead">
+    Us Ai to generate meta title ideas for your SEO content. Choose the quantity, enter a brand and keyword and away you go! 
+    </p>
+
+    <form class="" action="/meta-title" method="post">
+
+        <div class="mb-3">
+            <label for="numberInput" class="form-label">Number of Suggestions:</label>
+            <input type="text" class="form-control" id="numberInput" name="number" placeholder="e.g 3">
+          </div>
+          <div class="mb-3">
+            <label for="brandInput" class="form-label">Brand</label>
+            <input type="text" class="form-control" id="brandInput" name="brand" placeholder="e.g 'Apple'">
+          </div>
+          <div class="mb-3">
+            <label for="keywordInput" class="form-label">Keyword:</label>
+            <input type="text" class="form-control" id="keywordInput" name="keyword" placeholder="e.g 'iPhone '">
+          </div>
+  
+        <button type="submit" class="btn btn-danger btn-lg"> Generate Meta Title</button>
+  
+      </form>
+  </div>
+
+
+  <div class="p-3 rounded">
+    <div class="row">
+      <div class="col-lg-12">
+        <h5 class="text-primary">{{prompt}}</h5>
+        <br>
+        <div style='border-style:solid; border-width:1px; border-color: #D3D3D3; padding: 15px' class="lead" id="copyBox" contenteditable>
+          <ul style="list-style-type: none;">
+            {% for title in openAIAnswer %}
+              <li>{{ title }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+        <div>
+          <p style='font-size: small'>Note: You can click the generated meta titles to edit them.</p>
+          <button type="button" class="btn btn-sm btn-danger" onclick="copyToClipboard(document.getElementById('copyBox').innerText)">Copy</button>
+        </div>
+        <div id="message"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function copyToClipboard(text) {
+      // Get the text content of the element, if an element is passed in
+      if (typeof(text) === 'object') {
+        text = text.innerText;
+      }
+    
+      // Create a temporary input element
+      var tempInput = document.createElement("input");
+      tempInput.type = "text";
+      tempInput.value = text;
+    
+      // Append the input element to the document body
+      document.body.appendChild(tempInput);
+    
+      // Select the text content and copy it to the clipboard
+      tempInput.select();
+      document.execCommand("copy");
+    
+      // Remove the temporary input element from the document body
+      document.body.removeChild(tempInput);
+    
+      // Display the message
+      var message = document.getElementById("message");
+      message.innerHTML = "Text Copied!";
+    }
+    
+    </script>  
+   
+</main>
+{% endblock %}
