@@ -2,7 +2,7 @@ import os
 import openai
 import config
 
-openai.api_key = config.OPENAI_API_KEY
+openai.api_key = os.environ['OPENAI_API_KEY']
 
 def productDescription(number, brand, keyword):
 
