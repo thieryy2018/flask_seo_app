@@ -4,27 +4,27 @@
 {% block body %}
 <main class="container">
   <div class="bg-dark p-5 rounded mt-5">
-    <h1> Meta Title Generator </h1>
+    <h1> Blog Post Title Ideas </h1>
     <p class="lead">
-    Us Ai to generate meta title ideas for your SEO content. Choose the quantity, enter a brand and keyword and away you go! 
+    Us Ai to generate blog post title ideas for your SEO content. Choose the quantity, enter a brand and relevant industry to begin! 
     </p>
 
-    <form class="" action="/meta-title" method="post">
+    <form class="" action="/blog-titles" method="post">
 
         <div class="mb-3">
             <label for="numberInput" class="form-label">Number of Suggestions:</label>
             <input type="text" class="form-control" id="numberInput" name="number" placeholder="e.g 3" value="{{ number }}">
           </div>
           <div class="mb-3">
-            <label for="brandInput" class="form-label">Brand:</label>
-            <input type="text" class="form-control" id="brandInput" name="brand" placeholder="e.g 'Apple'" value="{{ brand }}">
+            <label for="industryInput" class="form-label">Industry:</label>
+            <input type="text" class="form-control" id="industryInput" name="industry" placeholder="e.g 'Technology'" value="{{ industry }}">
           </div>
           <div class="mb-3">
             <label for="keywordInput" class="form-label">Keyword:</label>
-            <input type="text" class="form-control" id="keywordInput" name="keyword" placeholder="e.g 'iPhone '" value="{{ keyword }}">
+            <input type="text" class="form-control" id="keywordInput" name="keyword" placeholder="e.g 'iPhone 14 Pro '" value="{{ keyword }}">
           </div>
   
-        <button type="submit" class="btn btn-danger btn-lg"> Generate Meta Title</button>
+        <button type="submit" class="btn btn-danger btn-lg"> Generate Blog Ideas!</button>
   
       </form>
   </div>

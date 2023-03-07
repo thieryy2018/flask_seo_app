@@ -4,27 +4,27 @@
 {% block body %}
 <main class="container">
   <div class="bg-dark p-5 rounded mt-5">
-    <h1> Meta Title Generator </h1>
+    <h1> Product Description Generator </h1>
     <p class="lead">
-    Us Ai to generate meta title ideas for your SEO content. Choose the quantity, enter a brand and keyword and away you go! 
+    Us Ai to generate product description ideas. Enter a brand, product name and keyword to get started.
     </p>
 
-    <form class="" action="/meta-title" method="post">
+    <form class="" action="/product-description" method="post">
 
         <div class="mb-3">
-            <label for="numberInput" class="form-label">Number of Suggestions:</label>
-            <input type="text" class="form-control" id="numberInput" name="number" placeholder="e.g 3" value="{{ number }}">
+            <label for="brandInput" class="form-label">Brand:</label>
+            <input type="text" class="form-control" id="brandInput" name="brand" placeholder="e.g Apple" value="{{ brand }}">
           </div>
           <div class="mb-3">
-            <label for="brandInput" class="form-label">Brand:</label>
-            <input type="text" class="form-control" id="brandInput" name="brand" placeholder="e.g 'Apple'" value="{{ brand }}">
+            <label for="productInput" class="form-label">Product:</label>
+            <input type="text" class="form-control" id="productInput" name="product" placeholder="e.g 'iPhone'" value="{{ product }}">
           </div>
           <div class="mb-3">
             <label for="keywordInput" class="form-label">Keyword:</label>
-            <input type="text" class="form-control" id="keywordInput" name="keyword" placeholder="e.g 'iPhone '" value="{{ keyword }}">
+            <input type="text" class="form-control" id="keywordInput" name="keyword" placeholder="e.g 'iPhone 14 pro '" value="{{ keyword }}">
           </div>
   
-        <button type="submit" class="btn btn-danger btn-lg"> Generate Meta Title</button>
+        <button type="submit" class="btn btn-danger btn-lg"> Generate Product Description!</button>
   
       </form>
   </div>
@@ -36,14 +36,10 @@
         <h5 class="text-primary text-white">{{prompt}}</h5>
         <br>
         <div style='border-style:solid; border-width:1px; border-color: #D3D3D3; padding: 15px' class="lead" id="copyBox" contenteditable>
-          <ul style="list-style-type: none;">
-            {% for title in openAIAnswer %}
-              <li>{{ title }}</li>
-            {% endfor %}
-          </ul>
+          <p>{{openAIAnswer}}</p>
         </div>
         <div>
-          <p style='font-size:18px; color:white'>Note: You can click the generated meta titles to edit them.</p>
+          <p style='font-size: 18px; color:white'>Note: You can click the generated descriptions to edit them.</p>
           <button type="button" class="btn btn-sm btn-danger" onclick="copyToClipboard(document.getElementById('copyBox').innerText)">Copy</button>
         </div>
         <div id="message"></div>
@@ -54,7 +50,7 @@
    <!-- New Row -->
    <div class="row mt-3">
     <div class="col-lg-6">
-      <h6>You may also like:</h6><a href="meta-description" class="btn btn-sm btn-primary">Meta Description Generator 💬</a>
+      <h6>You may also like:</h6><a href="rewriter" class="btn btn-sm btn-primary">Re-write Existing Text ✏️</a>
       <br>
     </div>
   </div>

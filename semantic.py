@@ -4,11 +4,11 @@ import config
 
 openai.api_key = config.OPENAI_API_KEY
 
-def metaTitle(number, brand, keyword):
+def semanticKeywords(number, keyword):
 
     response = openai.Completion.create(
     model="text-davinci-003",
-        prompt="Create {} clear, concise and descriptive meta title(s) for the brand {} using the keyword {}. The response should use the brand first, be more than 50 text characters in length, but less than 70 text characters in length. Its important not to repeat words, especially the brand or keyword entered. Use Google to get ideas for similar meta titles.".format(number, brand, keyword),
+        prompt="Find {} semantic (closely related keywords) for my keyword which is {}".format(number, keyword),
         temperature=0.7,
         max_tokens=300,
         top_p=1,
