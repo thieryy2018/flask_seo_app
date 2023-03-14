@@ -1,0 +1,11 @@
+.highlight {
+    background-color: yellow;
+}
+.highlight a {
+    cursor: pointer;
+  }
+  .suggested-link {
+    color: blue;
+    text-decoration: underline;
+    cursor: pointer;
+}

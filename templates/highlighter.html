@@ -1,0 +1,52 @@
+{% extends 'includes/layout.html' %}
+
+{% block body %}
+<main class="container">
+    <div class="container">
+        <h1>Keyword Highlighter</h1>
+        <form method="POST">
+            <div class="form-group">
+                <label for="main-text">Main Text:</label>
+                <div class="form-control" id="main-text" name="main-text" contenteditable="true">{{ main_text|safe }}</div>
+                <br>
+                <button type="button" class="btn btn-sm btn-danger" onclick="copyToClipboard(document.getElementById('main-text').innerHtml)">Copy</button>
+                <div id="message"></div>
+                <hr>
+            </div>
+            <div class="form-group">
+                <label for="keyword-list">Keyword List:</label>
+                <input type="text" class="form-control" id="keyword-list" name="keyword-list">
+            </div>
+            <div class="form-group">
+                <label for="url">URL:</label>
+                <input type="text" class="form-control" id="url" name="url">
+                <br>
+            </div>
+            <button type="button" class="btn btn-primary" id="highlight-btn">Highlight Keywords</button>
+            <button type="submit" class="btn btn-secondary" id="add-url-btn">Add URL to Highlighted Keywords</button>
+            <button type="button" class="btn btn-danger" id="clear-btn">Clear Highlighting</button>
+
+        </form>
+</main>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="{{ url_for('static', filename='js/highlighter.js') }}"></script>
+ 
+
+<script> 
+function copyToClipboard() {
+    var mainText = document.getElementById("main-text");
+    var range = document.createRange();
+    range.selectNodeContents(mainText);
+    var sel = window.getSelection();
+    sel.removeAllRanges();
+    sel.addRange(range);
+    document.execCommand("copy");
+    sel.removeAllRanges();
+    var message = document.getElementById("message");
+    message.innerHTML = "Text Copied!";
+}
+
+
+</script>
+{% endblock %}
