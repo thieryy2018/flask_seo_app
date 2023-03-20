@@ -2,33 +2,75 @@
 
 {% block body %}
 
-<div class="chat-container">
-  <div class="chat-header">
-    <h5>Neural Edge Chatbot</h5>
-  </div>
-  <div class="chat-history">
-    <div id="initial-message" class="message bot-message">Hi there! How can I help you today?</div>
-    {% for message in messages %}
-      <div class="message user-message">{{ message }}</div>
-    {% endfor %}
-    
-  </div>
-  <div class="chat-footer">
-    <button id="clear-chat" class="btn btn-sm btn-danger">Clear Chat</button>
-    <form id="chat-form" method="POST" action="{{ url_for('chatbot') }}">
-      <input type="text" class="chat-input form-control" placeholder="Type your message..." name="message">
-      <button type="submit" class="chat-submit btn btn-primary">Send</button>
-    </form>
-  </div>
-</div>
-
-<script src="{{ url_for('static', filename='js/chatbot.js') }}"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style>
+  .user-message {
+    background-color: green;
+    color:white;
+    padding: 5px 5px 5px 5px;
+    border-radius: 7px;
+  }
+  .bot-message {
+    background-color: blue;
+    color:white;
+    padding: 5px 5px 5px 5px;
+    border-radius: 7px;
+  }
   #chatbot-icon {
     display: none;
   }
-  </style>
-  
+</style>
+
+<div class="container">
+  <div class="row">
+      <div class="col-md-8 offset-md-2">
+          <h1 class="text-center mt-4">Chatbot</h1>
+          <div id="chat" class="border p-3 my-4">
+              <div id="messages" class="mb-3"></div>
+              <form id="message-form">
+                  <div class="input-group">
+                      <input type="text" id="message-input" class="form-control" placeholder="Type your message...">
+                      <div class="input-group-append">
+                          <button type="submit" class="btn btn-primary">Send</button>
+                      </div>
+                  </div>
+              </form>
+          </div>
+          <button id="clear-chat" class="btn btn-danger">Clear Chat</button>
+      </div>
+  </div>
+</div>
+
+<script>
+  $("#message-form").on("submit", function(event) {
+      event.preventDefault();
+
+      const message = $("#message-input").val();
+      $("#messages").append(`<p class="user-message">You: ${message}</p>`);
+
+      $.ajax({
+          url: "/send_message",
+          method: "POST",
+          data: {message: message}
+      }).done(function(data) {
+          const response = data.response;
+          $("#messages").append(`<p class="bot-message">Bot: ${response}</p>`);
+          $("#message-input").val("");
+      });
+  });
+  $("#clear-chat").on("click", function() {
+      $("#messages").empty();
+      reset_chat();
+  });
+
+  function reset_chat() {
+      $.ajax({
+          url: "/reset_chat",
+          method: "POST"
+      }).done(function() {
+          console.log("Chat reset");
+      });
+  }
+</script>
+
 
 {% endblock %}
