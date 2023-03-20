@@ -13,7 +13,7 @@ from bs4 import BeautifulSoup
 import openai
 import json
 import os
-from typing import Union
+from typing import Union, List
 
 
 def page_not_found(e):
@@ -48,18 +48,18 @@ def get_api_response(prompt: str) -> Union[str, None]:
 
     return text
 
-def update_list(message: str, pl: list[str]):
+def update_list(message: str, pl: List[str]):
     pl.append(message)
 
 
-def create_prompt(message: str, pl: list[str]) -> str:
+def create_prompt(message: str, pl: List[str]) -> str:
     p_message: str = f'\nHuman: {message}'
     update_list(p_message, pl)
     prompt: str = ''.join(pl)
     return prompt
 
 
-def get_bot_response(message: str, pl: list[str]) -> str:
+def get_bot_response(message: str, pl: List[str]) -> str:
     prompt: str = create_prompt(message, pl)
     bot_response: str = get_api_response(prompt)
 
