@@ -13,6 +13,7 @@ from bs4 import BeautifulSoup
 import openai
 import json
 import os
+from typing import Union
 
 
 def page_not_found(e):
@@ -24,7 +25,7 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 
 #Chatbot functions start ------->
 
-def get_api_response(prompt: str) -> str | None:
+def get_api_response(prompt: str) -> Union[str, None]:
     text: str | None = None
 
     try:
